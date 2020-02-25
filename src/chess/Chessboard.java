@@ -18,6 +18,12 @@ public class Chessboard extends java.lang.Object
 		
 	}
 	
+	public Piece getPiece(int x, int y) 
+	{
+		return this.piece[x][y];
+		
+	}
+	
 	public void setPiece(Position pos, Piece p )
 	{
 		this.piece[pos.getX()][pos.getY()] = p;
