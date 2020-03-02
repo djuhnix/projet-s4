@@ -113,6 +113,21 @@ public class Chessboard extends java.lang.Object
 	
 	public boolean isPiecePresentOnSameDiagonalBetween(Position start, Position end) 
 	{
+		boolean res = false;
+
+		if( !start.isOnSameLineAs(end))
+			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
+
+		int depX, finX, depY, finY;
+		
+		if(start.getX() < end.getX() )
+		{
+			depX = start.getX();
+			finX = end.getX();
+		}else {
+			depX = end.getX();
+			finX = start.getX();	
+		}
 		//TODO
 		return false;
 
