@@ -1,6 +1,7 @@
 package chess;
 
-import chess.pieces.Piece;
+import chess.pieces.*;
+import chess.util.Color;
 import chess.util.Position;
 
 public class Chessboard extends java.lang.Object
@@ -12,7 +13,39 @@ public class Chessboard extends java.lang.Object
 	 */
 	public Chessboard()
 	{
-		//TODO
+		piece = new Piece[8][8];
+		// PAWN
+		for(int i = 0; i < 8; i++)
+		{
+			piece[1][i] = new Pawn(this, new Position(i, 2), Color.WHITE);
+			piece[6][i] = new Pawn(this, new Position(i, 7), Color.BLACK);
+		}
+		//ROOK
+		piece[0][0] = new Rook(this, new Position(0, 0), Color.WHITE);
+		piece[7][0] = new Rook(this, new Position(0, 7), Color.BLACK);
+		piece[0][7] = new Rook(this, new Position(7, 0), Color.WHITE);
+		piece[7][7] = new Rook(this, new Position(7, 7), Color.BLACK);
+		
+		//KNIGHT
+		piece[0][1] = new Knight(this, new Position(1, 0), Color.WHITE);
+		piece[7][1] = new Knight(this, new Position(1, 7), Color.BLACK);
+		piece[0][6] = new Knight(this, new Position(6, 0), Color.WHITE);
+		piece[7][6] = new Knight(this, new Position(6, 7), Color.BLACK);
+		
+		//BISHOP
+		piece[0][2] = new Bishop(this, new Position(2, 0), Color.WHITE);
+		piece[7][2] = new Bishop(this, new Position(2, 7), Color.BLACK);
+		piece[0][5] = new Bishop(this, new Position(5, 0), Color.WHITE);
+		piece[7][5] = new Bishop(this, new Position(5, 7), Color.BLACK);
+
+		//QUEEN
+		piece[7][3] = new Queen(this, new Position(3, 7), Color.BLACK);
+		piece[0][3] = new Queen(this, new Position(3, 0), Color.WHITE);
+		
+		//KING
+		piece[7][4] = new King(this, new Position(3, 7), Color.BLACK);
+		piece[0][4] = new King(this, new Position(3, 0), Color.WHITE);
+		
 	}
 
 	/**
@@ -21,7 +54,7 @@ public class Chessboard extends java.lang.Object
 	 */
 	public Piece getPiece(Position pos) 
 	{
-		return this.piece[pos.getX()][pos.getY()];		
+		return this.piece[pos.getY()][pos.getX()];		
 	}
 	/**
 	 * Retourne la pièce de la case (x,y) de l'échiquier ou null si la case est vide.
@@ -32,13 +65,13 @@ public class Chessboard extends java.lang.Object
 	 */
 	public Piece getPiece(int x, int y) 
 	{
-		return this.piece[x][y];
+		return this.piece[y][x];
 
 	}
 
 	public void setPiece(Position pos, Piece p )
 	{
-		this.piece[pos.getX()][pos.getY()] = p;
+		this.piece[pos.getY()][pos.getX()] = p;
 	}
 
 	public boolean isPiecePresentOnSameColumnBetween(Position start, Position end)
@@ -68,7 +101,7 @@ public class Chessboard extends java.lang.Object
 			}
 			dep++;
 		}
-		
+		//TODO
 		return res;	
 	}
 	
@@ -107,15 +140,15 @@ public class Chessboard extends java.lang.Object
 			}
 			dep++;
 		}
-		
-		return res;	
+		//TODO
+		return res;
 	}
 	
 	public boolean isPiecePresentOnSameDiagonalBetween(Position start, Position end) 
 	{
 		boolean res = false;
 
-		if( !start.isOnSameLineAs(end))
+		if( !start.isOnSameDiagonalAs(end))
 			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
 
 		int depX, finX, depY, finY;
@@ -127,6 +160,23 @@ public class Chessboard extends java.lang.Object
 		}else {
 			depX = end.getX();
 			finX = start.getX();	
+		}
+		
+		if(start.getY() < end.getY() )
+		{
+			depY = start.getY();
+			finY = end.getY();
+		}else {
+			depY = end.getY();
+			finY = start.getY();	
+		}
+		while( (depX + 1 < finX) 
+				&& (depY + 1 < finY) 
+				&& !res)
+		{
+			
+			depX++;
+			depY++;
 		}
 		//TODO
 		return false;
@@ -161,8 +211,23 @@ public class Chessboard extends java.lang.Object
 	@Override
 	public String toString()
 	{
-		//TODO
-		return null;
+		StringBuilder builder = new StringBuilder("     A   B   C   D   E   F   G   H\n" + 
+											 "   ┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓\n");
+		for( int row = 7; row >= 0; row-- ) 
+		{
+			builder.append(row + 1 + "  ┃");
+			for( int column = 0; column < 8; column++ )
+			{
+				char piece = this.piece[row][column] == null ? ' ' : this.piece[row][column].getSymbol();
+				builder.append(" " + piece + " ┃");
+			}
+			builder.append(" " + (row + 1) + "\n");
+			if(row != 0)
+				builder.append	("   ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫\n");
+		}
+		builder.append		    ("   ┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛\n" + 
+				"     A   B   C   D   E   F   G   H");
+		return builder.toString();
 
 	}
 
