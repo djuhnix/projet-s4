@@ -25,13 +25,13 @@ public class Chessboard extends java.lang.Object
 		piece[7][0] = new Rook(this, new Position(0, 7), Color.BLACK);
 		piece[0][7] = new Rook(this, new Position(7, 0), Color.WHITE);
 		piece[7][7] = new Rook(this, new Position(7, 7), Color.BLACK);
-		
+
 		//KNIGHT
 		piece[0][1] = new Knight(this, new Position(1, 0), Color.WHITE);
 		piece[7][1] = new Knight(this, new Position(1, 7), Color.BLACK);
 		piece[0][6] = new Knight(this, new Position(6, 0), Color.WHITE);
 		piece[7][6] = new Knight(this, new Position(6, 7), Color.BLACK);
-		
+
 		//BISHOP
 		piece[0][2] = new Bishop(this, new Position(2, 0), Color.WHITE);
 		piece[7][2] = new Bishop(this, new Position(2, 7), Color.BLACK);
@@ -41,11 +41,11 @@ public class Chessboard extends java.lang.Object
 		//QUEEN
 		piece[7][3] = new Queen(this, new Position(3, 7), Color.BLACK);
 		piece[0][3] = new Queen(this, new Position(3, 0), Color.WHITE);
-		
+
 		//KING
 		piece[7][4] = new King(this, new Position(3, 7), Color.BLACK);
 		piece[0][4] = new King(this, new Position(3, 0), Color.WHITE);
-		
+
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class Chessboard extends java.lang.Object
 		if( !start.isOnSameColumnAs(end))
 			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
 
-		int dep, fin;
-		
+		int dep, fin, fix = start.getX();
+
 		if(start.getY() < end.getY() )
 		{
 			dep = start.getY();
@@ -91,20 +91,17 @@ public class Chessboard extends java.lang.Object
 			dep = end.getY();
 			fin = start.getY();	
 		}
-		
-		while( dep + 1 <  fin && !res )
+
+		while( (dep + 1 <  fin) && !res )
 		{
-			for(Piece p : this.piece[dep])
-			{
-				if(p != null)
-					res = true;
-			}
+			if(this.piece[dep][fix] != null)
+				res = true;
+
 			dep++;
 		}
-		//TODO
 		return res;	
 	}
-	
+
 	/**
 	 * teste la présence d'une pièce sur la ligne comprise entre les positions start et end (exclues).
 	 * 
@@ -120,8 +117,8 @@ public class Chessboard extends java.lang.Object
 		if( !start.isOnSameLineAs(end))
 			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
 
-		int dep, fin;
-		
+		int dep, fin, fix = start.getY();
+
 		if(start.getX() < end.getX() )
 		{
 			dep = start.getX();
@@ -130,20 +127,17 @@ public class Chessboard extends java.lang.Object
 			dep = end.getX();
 			fin = start.getX();	
 		}
-		
+
 		while( dep + 1 <  fin && !res )
 		{
-			for(Piece p : this.piece[dep])
-			{
-				if(p != null)
-					res = true;
-			}
+			if(this.piece[fix][dep] != null)
+				res = true;
+
 			dep++;
 		}
-		//TODO
 		return res;
 	}
-	
+
 	public boolean isPiecePresentOnSameDiagonalBetween(Position start, Position end) 
 	{
 		boolean res = false;
@@ -152,7 +146,7 @@ public class Chessboard extends java.lang.Object
 			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
 
 		int depX, finX, depY, finY;
-		
+
 		if(start.getX() < end.getX() )
 		{
 			depX = start.getX();
@@ -161,7 +155,7 @@ public class Chessboard extends java.lang.Object
 			depX = end.getX();
 			finX = start.getX();	
 		}
-		
+
 		if(start.getY() < end.getY() )
 		{
 			depY = start.getY();
@@ -172,13 +166,14 @@ public class Chessboard extends java.lang.Object
 		}
 		while( (depX + 1 < finX) 
 				&& (depY + 1 < finY) 
-				&& !res)
+				&& !res )
 		{
-			
+			if(this.piece[depY][depX] != null)
+				res = true;
+
 			depX++;
 			depY++;
 		}
-		//TODO
 		return false;
 
 	}
@@ -212,7 +207,7 @@ public class Chessboard extends java.lang.Object
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder("     A   B   C   D   E   F   G   H\n" + 
-											 "   ┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓\n");
+				"   ┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓\n");
 		for( int row = 7; row >= 0; row-- ) 
 		{
 			builder.append(row + 1 + "  ┃");
