@@ -1,11 +1,99 @@
 package chess;
 
+import chess.util.ChessMoveException;
+import chess.util.Color;
+import chess.util.Position;
+/**
+ * Classe représentant une partie d'échecs.
+ * @author olea0001
+ *
+ */
 public class Game {
+	private static Chessboard board;
+	private Color currentColor;
+	private String blackPlayerName;
+	private String whitePlayerName;
+
 	
-	 public static void main( String [] args ) 
-	 {
-		 Chessboard board = new Chessboard();
-		 System.out.print(board);
-	 }
+	/**
+	 * Constructeur
+	 * 
+	 * @param blackPlayerName nom du joueur ayant les pièces noires
+	 * @param whitePlayerName nom du joueur ayant les pièces blanches
+	 */
+	public Game(String blackPlayerName, String whitePlayerName) {
+		this.blackPlayerName = blackPlayerName;
+		this.whitePlayerName = whitePlayerName;
+		this.currentColor = Color.WHITE;
+		Game.board = new Chessboard();
+	}
+	
+	/**
+	 * Retourne la couleur des pièces du joueur dont c'est le tour
+	 * 
+	 * @return the currentColor
+	 */
+	public Color getCurrentColor() {
+		return this.currentColor;
+	}
+
+	/**
+	 * Retourne le nom du joueur ayant les pièces noires
+	 * 
+	 * @return the blackPlayerName
+	 */
+	public String getBlackPlayerName() {
+		return this.blackPlayerName;
+	}
+
+	/**
+	 * Retourne le nom du joueur ayant les pièces blanches
+	 * @return the whitePlayerName
+	 */
+	public String getWhitePlayerName() {
+		return this.whitePlayerName;
+	}
+
+	/**
+	 * Tour du jour courant. 
+	 * Si une piece de la couleur actuelle est présente à la position start, elle est déplacer si cela est valide à la position end.
+	 * 
+	 * @param start
+	 * @param end
+	 * @throws ChessMoveException 
+	 */
+	public void turn(Position start, Position end) throws ChessMoveException
+	{
+		if(Game.board.getPiece(start) == null)
+			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ est vide.", start, end);
+		
+		else if(Game.board.getPiece(start).getColor() != this.currentColor)
+			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ  contient une pièce de l'adversaire.", start, end);
+		
+		else if(!Game.board.getPiece(start).isValidMove(end))
+			throw new ChessMoveException("Impossible de d'effectuer le déplacement, destination invalide pour cette piece.", start, end);
+
+		//déplace la piece vers la destination (end)
+		Game.board.setPiece(end, Game.board.getPiece(start));
+		
+		//retire la piece de son emplacement
+		Game.board.setPiece(start, null);
+		
+		//change de couleur
+		this.currentColor = this.currentColor == Color.BLACK ? Color.WHITE
+															 : Color.BLACK;
+		
+	}
+
+	/**
+	 * Programme principal. Permet à deux joueurs de saisir leurs déplacements à tour de rôle, en affichant l'échiquier après chaque coup.
+	 * 
+	 * @param args arguments de ligne de commande, pas utilisés.
+	 */
+	public static void main( String [] args ) 
+	{
+		Game chess = new Game("Blue", "Red");
+		System.out.print(Game.board);
+	}
 
 }

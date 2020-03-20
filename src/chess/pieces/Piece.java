@@ -126,7 +126,7 @@ public abstract class Piece
 	 * @param destination position de la case de destination du déplacement.
 	 * @return true si le mouvement est possible, false sinon.
 	 */
-	abstract boolean  isValidMove(Position destination);
+	public abstract boolean  isValidMove(Position destination);
 	
 	
 }

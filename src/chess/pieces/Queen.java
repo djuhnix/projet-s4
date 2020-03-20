@@ -19,7 +19,7 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	boolean isValidMove(Position destination) {
+	public boolean isValidMove(Position destination) {
 		// TODO Auto-generated method stub
 		return false;
 	}
