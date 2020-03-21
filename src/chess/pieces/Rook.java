@@ -20,8 +20,10 @@ public class Rook extends Piece {
 
 	@Override
 	public boolean isValidMove(Position destination) {
-		// TODO Auto-generated method stub
-		return false;
+		// A pofiner
+		return (!this.getPosition().equals(destination)
+				&& (this.getPosition().isOnSameColumnAs(destination) 
+				|| this.getPosition().isOnSameLineAs(destination) ));
 	}
 
 }

@@ -22,6 +22,7 @@ public class Knight extends Piece {
 	public boolean isValidMove(Position destination) {
 		boolean res = false;
 		/*
+		 * Pas encore prêter attention
 		if (!this.getPosition().equals(destination)) {
 
 			int deltaX = Math.abs(this.getPosition().getX() - destination.getX());

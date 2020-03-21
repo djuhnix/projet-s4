@@ -98,12 +98,7 @@ public class Position {
 	 */
 	public boolean isOnSameLineAs(Position pos) 
 	{
-		boolean res = false;
-		if (pos.y == this.y)
-		{
-			res = true;
-		}
-		return res;
+		return (pos.y == this.y);
 	}
 	/**
 	 * Vérifie que la position passée en paramètre est sur la même colonne que l'objet actuel
@@ -112,12 +107,7 @@ public class Position {
 	 */
 	public boolean isOnSameColumnAs(Position pos) 
 	{
-		boolean res = false;
-		if (pos.x == this.x)
-		{
-			res = true;
-		}
-		return res;
+		return (pos.x == this.x);
 	}
 	/**
 	 * Vérifie que la position passée en paramètre est sur la même diagonale que l'objet actuel
