@@ -174,7 +174,7 @@ public class Chessboard extends java.lang.Object
 			depX++;
 			depY++;
 		}
-		return false;
+		return res;
 
 	}
 
