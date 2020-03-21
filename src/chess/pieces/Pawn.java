@@ -27,6 +27,7 @@ public class Pawn extends Piece {
 	@Override
 	public boolean isValidMove(Position destination) {
 		boolean res = false;
+		boolean step = false;
 
 		if ( !this.getPosition().equals(destination) ) {
 
@@ -34,14 +35,14 @@ public class Pawn extends Piece {
 			if (this.getColor() == Color.WHITE) {
 				if (this.getPosition().getX() < destination.getX()
 						&& this.getPosition().getY() < destination.getY()) {
-					res = true;
+					step = true;
 				}
 			} 
 			// les pions noirs avancent vers le bas
 			else {
 				if (this.getPosition().getX() > destination.getX()
 						&& this.getPosition().getY() > destination.getY()) {
-					res = true;
+					step = true;
 				}
 			}
 
@@ -49,18 +50,22 @@ public class Pawn extends Piece {
 			int deltaY = Math.abs(this.getPosition().getY() - destination.getY());
 			
 			// Mouvements normaux
-			if ( deltaX  == 1 && this.getPosition().isOnSameColumnAs(destination)) {
+			if ( step 
+					&& deltaX  == 1 
+					&& this.getPosition().isOnSameColumnAs(destination)) {
 				res = true;
 			}
 			// Premier mouvement
-			else if ( deltaX == 2
-						&& this.getPosition().isOnSameColumnAs(destination)
-						&& this.notMovedYet) {
+			else if ( step 
+					&& deltaX == 2
+					&& this.getPosition().isOnSameColumnAs(destination)
+					&& this.notMovedYet ) {
 				res = true;
 
 			}
 			// Capture : mouvements en diagonales
-			if (!this.notMovedYet
+			else if ( step 
+					&& !this.notMovedYet
 					&& this.getPosition().isOnSameDiagonalAs(destination)
 					&& ( deltaY == 1 && deltaX == 1)) {
 				res = true;
