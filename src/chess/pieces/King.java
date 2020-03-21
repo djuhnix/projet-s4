@@ -20,8 +20,16 @@ public class King extends Piece {
 
 	@Override
 	public boolean isValidMove(Position destination) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		if (!this.getPosition().equals(destination)){
+			//Ajouter le roque
+			if ( Math.abs(destination.getX() - this.getPosition().getX()) <= 1 
+				&& Math.abs(destination.getY() - this.getPosition().getY()) <= 1 )
+			{
+				res = true;
+			}
+		}
+		return res;
 	}
 
 }
