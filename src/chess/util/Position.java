@@ -126,13 +126,8 @@ public class Position {
 	 */
 	public boolean isOnSameDiagonalAs(Position pos) 
 	{
-		boolean res = false;
-		if( (pos.x - this.x) == (pos.y - this.y) 
-			|| (pos.x - this.x) == (this.y - pos.y))
-		{
-			res = true;
-		}
-		return res;
+		return ( (pos.x - this.x) == (pos.y - this.y) 
+				|| (pos.x - this.x) == (this.y - pos.y));
 	}
 	/**
 	 * Donne l'accès à la distance entre l'objet Manahattan et l'objet actuel 
