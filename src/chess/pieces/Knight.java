@@ -20,8 +20,17 @@ public class Knight extends Piece {
 
 	@Override
 	public boolean isValidMove(Position destination) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		/*
+		if (!this.getPosition().equals(destination)) {
+
+			int deltaX = Math.abs(this.getPosition().getX() - destination.getX());
+			int deltaY = Math.abs(this.getPosition().getY() - destination.getY());
+			if ((deltaX+deltaY) == 3 && deltaX !=0 && deltaY !=0)
+			{return true;}
+		}
+		*/
+		return res;
 	}
 
 }
