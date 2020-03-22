@@ -69,9 +69,10 @@ public class Chessboard extends java.lang.Object
 
 	}
 
-	public void setPiece(Position pos, Piece p )
+	public void setPiece(Position destination, Piece piece )
 	{
-		this.piece[pos.getY()][pos.getX()] = p;
+		if( this.piece[destination.getY()][destination.getX()].getColor() != piece.getColor())
+			this.piece[destination.getY()][destination.getX()] = piece;
 	}
 
 	public boolean isPiecePresentOnSameColumnBetween(Position start, Position end)

@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Scanner;
+
 import chess.util.ChessMoveException;
 import chess.util.Color;
 import chess.util.Position;
@@ -91,7 +93,10 @@ public class Game {
 	 */
 	public static void main( String [] args ) 
 	{
-		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez saisir la case de destination");
+		String str = sc.nextLine();
+		System.out.println("Vous avez saisi : " + str);
 		Game chess = new Game("Blue", "Red");		
 		System.out.print(chess.board);
 	}

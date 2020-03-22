@@ -65,7 +65,7 @@ public class Pawn extends Piece {
 			}
 			// Capture : mouvements en diagonales
 			else if ( step 
-					&& !this.notMovedYet
+					&& this.board.getPiece(destination).getColor() != this.getColor()
 					&& this.getPosition().isOnSameDiagonalAs(destination)
 					&& ( deltaY == 1 && deltaX == 1)) {
 				res = true;
