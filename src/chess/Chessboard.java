@@ -17,8 +17,8 @@ public class Chessboard extends java.lang.Object
 		// PAWN
 		for(int i = 0; i < 8; i++)
 		{
-			piece[1][i] = new Pawn(this, new Position(i, 2), Color.WHITE);
-			piece[6][i] = new Pawn(this, new Position(i, 7), Color.BLACK);
+			piece[1][i] = new Pawn(this, new Position(i, 1), Color.WHITE);
+			piece[6][i] = new Pawn(this, new Position(i, 6), Color.BLACK);
 		}
 		//ROOK
 		piece[0][0] = new Rook(this, new Position(0, 0), Color.WHITE);

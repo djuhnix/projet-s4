@@ -71,10 +71,9 @@ public class Game {
 
 		else if(this.board.getPiece(start).getColor() != this.currentColor)
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ  contient une pièce de l'adversaire.", start, end);
-
-		else if(!this.board.getPiece(start).isValidMove(end))
-			throw new ChessMoveException("Impossible de d'effectuer le déplacement, destination invalide pour cette piece.", start, end);
-
+		
+		this.board.getPiece(start).moveTo(end);
+		
 		//déplace la piece vers la destination (end)
 		this.board.setPiece(end, this.board.getPiece(start));
 
