@@ -75,10 +75,10 @@ public class Game {
 		this.board.getPiece(start).moveTo(end);
 
 		//déplace la piece vers la destination (end)
-		this.board.setPiece(end, this.board.getPiece(start));
+		//this.board.setPiece(end, this.board.getPiece(start));
 
 		//retire la piece de son emplacement
-		this.board.setPiece(start, null);
+		//this.board.setPiece(start, null);
 
 		//change de couleur
 		this.currentColor = this.currentColor == Color.BLACK ? Color.WHITE

@@ -21,14 +21,13 @@ public class Rook extends Piece {
 
 	@Override
 	public boolean isValidMove(Position destination) {
-		// A pofiner
 		boolean res = false;
-		if (this.getPosition().equals(destination)) {
-			if (this.getPosition().isOnSameColumnAs(destination) 
-					&& this.board.isPiecePresentOnSameColumnBetween(this.getPosition(), destination))
+		if (!this.getPosition().equals(destination)) {
+			if(this.getPosition().isOnSameColumnAs(destination)
+					&& !this.board.isPiecePresentOnSameColumnBetween(this.getPosition(), destination)) 
 				res = true;
-			if (this.getPosition().isOnSameLineAs(destination) 
-					&& this.board.isPiecePresentOnSameLineBetween(this.getPosition(), destination))
+			if(this.getPosition().isOnSameLineAs(destination)
+					&& !this.board.isPiecePresentOnSameLineBetween(this.getPosition(), destination))
 				res = true;
 		}
 		return res;

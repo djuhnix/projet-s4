@@ -78,8 +78,8 @@ public class Pawn extends Piece {
 	@Override
 	public void moveTo(Position destination) throws ChessMoveException
 	{
-		this.notMovedYet = false;
 		super.moveTo(destination);
+		this.notMovedYet = false;
 	}
 
 }

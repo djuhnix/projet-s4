@@ -7,7 +7,6 @@ package chess.util;
  *
  */
 public enum Color implements java.lang.Comparable<Color>, java.io.Serializable {
-	
 	 BLACK,
 	 WHITE;	
 }
