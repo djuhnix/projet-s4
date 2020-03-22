@@ -65,7 +65,7 @@ public class Position {
 		{
 			if(first == letter)
 			{
-				this.x = i;
+				this.x = i - 1;
 			}
 			letter++;
 		}
@@ -73,7 +73,6 @@ public class Position {
 	
 	/**
 	 * Retourne une chaîne de 2 caractères contenant la notation algébrique de la position courante
-	 * @param algebraicNotation
 	 * @return la chaîne
 	 */
 	public String toAlgebraicNotation() 

@@ -16,7 +16,7 @@ public class Game {
 	private String blackPlayerName;
 	private String whitePlayerName;
 
-	
+
 	/**
 	 * Constructeur
 	 * 
@@ -29,7 +29,7 @@ public class Game {
 		this.currentColor = Color.WHITE;
 		this.board = new Chessboard();
 	}
-	
+
 	/**
 	 * Retourne la couleur des pièces du joueur dont c'est le tour
 	 * 
@@ -68,22 +68,22 @@ public class Game {
 	{
 		if(this.board.getPiece(start) == null)
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ est vide.", start, end);
-		
+
 		else if(this.board.getPiece(start).getColor() != this.currentColor)
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ  contient une pièce de l'adversaire.", start, end);
-		
+
 		else if(!this.board.getPiece(start).isValidMove(end))
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, destination invalide pour cette piece.", start, end);
 
 		//déplace la piece vers la destination (end)
 		this.board.setPiece(end, this.board.getPiece(start));
-		
+
 		//retire la piece de son emplacement
 		this.board.setPiece(start, null);
-		
+
 		//change de couleur
 		this.currentColor = this.currentColor == Color.BLACK ? Color.WHITE
-															 : Color.BLACK;
+				: Color.BLACK;
 	}
 
 	/**
@@ -93,12 +93,29 @@ public class Game {
 	 */
 	public static void main( String [] args ) 
 	{
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez saisir la case de destination");
-		String str = sc.nextLine();
-		System.out.println("Vous avez saisi : " + str);
+
 		Game chess = new Game("Blue", "Red");		
-		System.out.print(chess.board);
+		System.out.println(chess.board);
+		System.out.println("Début du jeu");
+		Scanner sc = new Scanner(System.in);
+		Color beforeTurn = chess.getCurrentColor();
+		do {
+			System.out.print("Veuillez saisir la case de depart : ");
+			String dep = sc.nextLine();
+
+			System.out.print("Veuillez saisir la case de destination ");
+			String fin = sc.nextLine();
+			if(Position.isAlgebraicNotation(dep) && Position.isAlgebraicNotation(fin)) {
+				try {
+					chess.turn(new Position(dep), new Position(fin));
+					System.out.println(chess.board);
+				} catch (ChessMoveException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		}while(beforeTurn == chess.getCurrentColor());
+
 	}
 
 }
