@@ -103,7 +103,7 @@ public class Game {
 				System.out.print("Veuillez saisir la case de depart : ");
 				String dep = sc.nextLine();
 
-				System.out.print("Veuillez saisir la case de destination ");
+				System.out.print("Veuillez saisir la case de destination : ");
 				String fin = sc.nextLine();
 				try {
 					chess.turn(new Position(dep), new Position(fin));
@@ -114,6 +114,8 @@ public class Game {
 				}
 
 			}while(beforeTurn == chess.getCurrentColor());
+			System.out.println("/!\\ Changement de tour /!\\");
+
 		}
 
 	}
