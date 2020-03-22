@@ -21,16 +21,17 @@ public class Knight extends Piece {
 	@Override
 	public boolean isValidMove(Position destination) {
 		boolean res = false;
-		/*
-		 * Pas encore prêter attention
+		
+		// * Pas encore testé
 		if (!this.getPosition().equals(destination)) {
 
-			int deltaX = Math.abs(this.getPosition().getX() - destination.getX());
-			int deltaY = Math.abs(this.getPosition().getY() - destination.getY());
-			if ((deltaX+deltaY) == 3 && deltaX !=0 && deltaY !=0)
-			{return true;}
+			
+			if ( this.getPosition().getManhattanDistance(destination) == 3 
+					&& !this.getPosition().isOnSameColumnAs(destination)
+					&& !this.getPosition().isOnSameLineAs(destination) )
+			res = true;
 		}
-		*/
+		
 		return res;
 	}
 
