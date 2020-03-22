@@ -51,7 +51,8 @@ public class Pawn extends Piece {
 			// Mouvements normaux
 			if ( step 
 					&& deltaY  == 1 
-					&& this.getPosition().isOnSameColumnAs(destination)) {
+					&& this.getPosition().isOnSameColumnAs(destination)
+					&& this.board.getPiece(destination).getColor() != this.getColor()) {
 				res = true;
 			}
 			// Premier mouvement
