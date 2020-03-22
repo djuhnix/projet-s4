@@ -15,7 +15,8 @@ public class King extends Piece {
 	 */
 	public King(Chessboard board, Position position, Color color) 
 	{
-		super(board, position, color, "King", color == Color.WHITE ? Symbol.WHITE_KING : Symbol.BLACK_KING);
+		super(board, position, color, "King", color == Color.WHITE ? Symbol.WHITE_KING 
+																   : Symbol.BLACK_KING);
 	}
 
 	@Override

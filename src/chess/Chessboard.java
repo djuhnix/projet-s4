@@ -71,7 +71,11 @@ public class Chessboard extends java.lang.Object
 
 	public void setPiece(Position destination, Piece piece )
 	{
-		if( this.piece[destination.getY()][destination.getX()].getColor() != piece.getColor())
+		if(this.getPiece(destination) == null
+				|| piece == null
+				|| ( this.piece[destination.getY()] != null 
+				&& this.getPiece(destination) != null 
+				&& this.getPiece(destination).getColor() != piece.getColor()))
 			this.piece[destination.getY()][destination.getX()] = piece;
 	}
 
@@ -80,7 +84,7 @@ public class Chessboard extends java.lang.Object
 		boolean res = false;
 
 		if( !start.isOnSameColumnAs(end))
-			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
+			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même colonne");
 
 		int dep, fin, fix = start.getX();
 

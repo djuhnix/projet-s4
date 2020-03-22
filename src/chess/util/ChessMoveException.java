@@ -21,7 +21,7 @@ public class ChessMoveException extends Exception {
 	 */
 	public ChessMoveException(String message, Position startingPosition, Position destination)
 	{
-		super("Erreur de déplacement de pièce : " + message + " de " + startingPosition.toAlgebraicNotation() + " à " + destination.toAlgebraicNotation());
+		super("Erreur de déplacement de pièce de " + startingPosition.toAlgebraicNotation() + " à " + destination.toAlgebraicNotation() + " : \n\t" + message);
 	}
 
 }

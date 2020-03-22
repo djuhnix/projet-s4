@@ -15,7 +15,8 @@ public class Knight extends Piece {
 	 */
 	public Knight(Chessboard board, Position position, Color color) 
 	{
-		super(board, position, color, "Knight", color == Color.WHITE ? Symbol.WHITE_KNIGHT : Symbol.BLACK_KNIGHT);
+		super(board, position, color, "Knight", color == Color.WHITE ? Symbol.WHITE_KNIGHT 
+																	 : Symbol.BLACK_KNIGHT);
 	}
 
 	@Override

@@ -15,15 +15,23 @@ public class Rook extends Piece {
 	 */
 	public Rook(Chessboard board, Position position, Color color) 
 	{
-		super(board, position, color, "Rook", color == Color.WHITE ? Symbol.WHITE_ROOK : Symbol.BLACK_ROOK);
+		super(board, position, color, "Rook", color == Color.WHITE ? Symbol.WHITE_ROOK 
+				: Symbol.BLACK_ROOK);
 	}
 
 	@Override
 	public boolean isValidMove(Position destination) {
 		// A pofiner
-		return (!this.getPosition().equals(destination)
-				&& !this.board.isPiecePresentOnSameLineBetween(this.getPosition(), destination)
-				&& !this.board.isPiecePresentOnSameColumnBetween(this.getPosition(), destination));
+		boolean res = false;
+		if (this.getPosition().equals(destination)) {
+			if (this.getPosition().isOnSameColumnAs(destination) 
+					&& this.board.isPiecePresentOnSameColumnBetween(this.getPosition(), destination))
+				res = true;
+			if (this.getPosition().isOnSameLineAs(destination) 
+					&& this.board.isPiecePresentOnSameLineBetween(this.getPosition(), destination))
+				res = true;
+		}
+		return res;
 	}
 
 }

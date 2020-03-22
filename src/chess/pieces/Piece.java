@@ -116,7 +116,7 @@ public abstract class Piece
 	public void moveTo(Position destination) throws ChessMoveException 
 	{
 		if(!this.isValidMove(destination))
-			throw new ChessMoveException("Impossible de déplacer la pièce vers la destination donnée", this.position, destination);
+			throw new ChessMoveException("Impossible de déplacer la pièce vers la destination donnée mouvement invalide pour " + this.name, this.position, destination);
 		
 		this.position = destination;
 		this.board.setPiece(destination, this);

@@ -20,7 +20,8 @@ public class Pawn extends Piece {
 	 */
 	public Pawn(Chessboard board, Position position, Color color) 
 	{
-		super(board, position, color, "Pawn", color == Color.WHITE ? Symbol.WHITE_PAWN : Symbol.BLACK_PAWN);
+		super(board, position, color, "Pawn", color == Color.WHITE ? Symbol.WHITE_PAWN 
+																   : Symbol.BLACK_PAWN);
 		this.notMovedYet = true;
 	}
 
@@ -33,13 +34,13 @@ public class Pawn extends Piece {
 
 			// les pions blancs avancent vers le haut
 			if (this.getColor() == Color.WHITE) {
-				if (this.getPosition().getX() < destination.getX()) {
+				if (this.getPosition().getY() < destination.getY()) {
 					step = true;
 				}
 			} 
 			// les pions noirs avancent vers le bas
 			else {
-				if (this.getPosition().getX() > destination.getX()) {
+				if (this.getPosition().getY() > destination.getY()) {
 					step = true;
 				}
 			}
@@ -49,13 +50,13 @@ public class Pawn extends Piece {
 			
 			// Mouvements normaux
 			if ( step 
-					&& deltaX  == 1 
+					&& deltaY  == 1 
 					&& this.getPosition().isOnSameColumnAs(destination)) {
 				res = true;
 			}
 			// Premier mouvement
 			else if ( step 
-					&& deltaX == 2
+					&& deltaY == 2
 					&& this.getPosition().isOnSameColumnAs(destination)
 					&& this.notMovedYet ) {
 				res = true;
@@ -65,6 +66,7 @@ public class Pawn extends Piece {
 			else if ( step 
 					&& this.board.getPiece(destination).getColor() != this.getColor()
 					&& this.getPosition().isOnSameDiagonalAs(destination)
+					&& this.board.getPiece(destination) != null
 					&& ( deltaY == 1 && deltaX == 1)) {
 				res = true;
 			}

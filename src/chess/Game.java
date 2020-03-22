@@ -70,10 +70,10 @@ public class Game {
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ est vide.", start, end);
 
 		else if(this.board.getPiece(start).getColor() != this.currentColor)
-			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ  contient une pièce de l'adversaire.", start, end);
-		
+			throw new ChessMoveException("Impossible de d'effectuer le déplacement, c'est au tour de l'adversaire.", start, end);
+
 		this.board.getPiece(start).moveTo(end);
-		
+
 		//déplace la piece vers la destination (end)
 		this.board.setPiece(end, this.board.getPiece(start));
 
@@ -82,7 +82,7 @@ public class Game {
 
 		//change de couleur
 		this.currentColor = this.currentColor == Color.BLACK ? Color.WHITE
-				: Color.BLACK;
+															 : Color.BLACK;
 	}
 
 	/**
@@ -98,21 +98,23 @@ public class Game {
 		System.out.println("Début du jeu");
 		Scanner sc = new Scanner(System.in);
 		Color beforeTurn = chess.getCurrentColor();
-		do {
-			System.out.print("Veuillez saisir la case de depart : ");
-			String dep = sc.nextLine();
+		while(true) {
+			do {
+				System.out.print("Veuillez saisir la case de depart : ");
+				String dep = sc.nextLine();
 
-			System.out.print("Veuillez saisir la case de destination ");
-			String fin = sc.nextLine();
-			try {
-				chess.turn(new Position(dep), new Position(fin));
-				System.out.println(chess.board);
-			} catch (ChessMoveException e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
+				System.out.print("Veuillez saisir la case de destination ");
+				String fin = sc.nextLine();
+				try {
+					chess.turn(new Position(dep), new Position(fin));
+					System.out.println(chess.board);
+				} catch (ChessMoveException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
 
-		}while(beforeTurn == chess.getCurrentColor());
+			}while(beforeTurn == chess.getCurrentColor());
+		}
 
 	}
 
