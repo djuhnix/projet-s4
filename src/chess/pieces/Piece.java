@@ -115,7 +115,8 @@ public abstract class Piece
 	 */
 	public void moveTo(Position destination) throws ChessMoveException 
 	{
-		if(!this.isValidMove(destination))
+		if(!this.isValidMove(destination) 
+				&& this.board.getPiece(destination).getColor() != this.color)
 			throw new ChessMoveException("Impossible de déplacer la pièce vers la destination donnée", this.position, destination);
 		
 		this.position = destination;		

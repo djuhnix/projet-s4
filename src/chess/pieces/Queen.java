@@ -20,8 +20,11 @@ public class Queen extends Piece {
 
 	@Override
 	public boolean isValidMove(Position destination) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return !this.getPosition().equals(destination)
+				&& !this.board.isPiecePresentOnSameLineBetween(this.getPosition(), destination)
+				&& !this.board.isPiecePresentOnSameColumnBetween(this.getPosition(), destination)
+				&& !this.board.isPiecePresentOnSameDiagonalBetween(this.getPosition(), destination);
 	}
 
 }

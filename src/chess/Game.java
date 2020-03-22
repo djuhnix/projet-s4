@@ -9,7 +9,7 @@ import chess.util.Position;
  *
  */
 public class Game {
-	private static Chessboard board;
+	private Chessboard board;
 	private Color currentColor;
 	private String blackPlayerName;
 	private String whitePlayerName;
@@ -25,7 +25,7 @@ public class Game {
 		this.blackPlayerName = blackPlayerName;
 		this.whitePlayerName = whitePlayerName;
 		this.currentColor = Color.WHITE;
-		Game.board = new Chessboard();
+		this.board = new Chessboard();
 	}
 	
 	/**
@@ -64,25 +64,24 @@ public class Game {
 	 */
 	public void turn(Position start, Position end) throws ChessMoveException
 	{
-		if(Game.board.getPiece(start) == null)
+		if(this.board.getPiece(start) == null)
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ est vide.", start, end);
 		
-		else if(Game.board.getPiece(start).getColor() != this.currentColor)
+		else if(this.board.getPiece(start).getColor() != this.currentColor)
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, la case de départ  contient une pièce de l'adversaire.", start, end);
 		
-		else if(!Game.board.getPiece(start).isValidMove(end))
+		else if(!this.board.getPiece(start).isValidMove(end))
 			throw new ChessMoveException("Impossible de d'effectuer le déplacement, destination invalide pour cette piece.", start, end);
 
 		//déplace la piece vers la destination (end)
-		Game.board.setPiece(end, Game.board.getPiece(start));
+		this.board.setPiece(end, this.board.getPiece(start));
 		
 		//retire la piece de son emplacement
-		Game.board.setPiece(start, null);
+		this.board.setPiece(start, null);
 		
 		//change de couleur
 		this.currentColor = this.currentColor == Color.BLACK ? Color.WHITE
 															 : Color.BLACK;
-		
 	}
 
 	/**
@@ -92,8 +91,9 @@ public class Game {
 	 */
 	public static void main( String [] args ) 
 	{
-		Game chess = new Game("Blue", "Red");
-		System.out.print(Game.board);
+		
+		Game chess = new Game("Blue", "Red");		
+		System.out.print(chess.board);
 	}
 
 }

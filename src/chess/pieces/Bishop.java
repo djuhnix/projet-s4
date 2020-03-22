@@ -22,7 +22,8 @@ public class Bishop extends Piece {
 	@Override
 	public boolean isValidMove(Position destination) {
 		// a améliorer : la présense de pion de la même couleur sur la diagonale
-		return (!this.getPosition().equals(destination) && this.getPosition().isOnSameDiagonalAs(destination));
+		return (!this.getPosition().equals(destination) 
+				&& !this.board.isPiecePresentOnSameDiagonalBetween(this.getPosition(), destination));
 	}
 
 }
