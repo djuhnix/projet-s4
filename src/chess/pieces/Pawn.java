@@ -33,15 +33,13 @@ public class Pawn extends Piece {
 
 			// les pions blancs avancent vers le haut
 			if (this.getColor() == Color.WHITE) {
-				if (this.getPosition().getX() < destination.getX()
-						&& this.getPosition().getY() < destination.getY()) {
+				if (this.getPosition().getX() < destination.getX()) {
 					step = true;
 				}
 			} 
 			// les pions noirs avancent vers le bas
 			else {
-				if (this.getPosition().getX() > destination.getX()
-						&& this.getPosition().getY() > destination.getY()) {
+				if (this.getPosition().getX() > destination.getX()) {
 					step = true;
 				}
 			}

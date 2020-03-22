@@ -105,15 +105,14 @@ public class Game {
 
 			System.out.print("Veuillez saisir la case de destination ");
 			String fin = sc.nextLine();
-			if(Position.isAlgebraicNotation(dep) && Position.isAlgebraicNotation(fin)) {
-				try {
-					chess.turn(new Position(dep), new Position(fin));
-					System.out.println(chess.board);
-				} catch (ChessMoveException e) {
-					System.out.println(e.getMessage());
-					e.printStackTrace();
-				}
+			try {
+				chess.turn(new Position(dep), new Position(fin));
+				System.out.println(chess.board);
+			} catch (ChessMoveException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
+
 		}while(beforeTurn == chess.getCurrentColor());
 
 	}

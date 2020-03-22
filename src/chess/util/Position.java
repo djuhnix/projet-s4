@@ -56,16 +56,16 @@ public class Position {
 		if (!Position.isAlgebraicNotation(algebraicNotation))
 			throw new IllegalArgumentException("Notation algébrique incorrecte");
 		
-		this.y = Character.getNumericValue(algebraicNotation.charAt(1));
+		this.y = Character.getNumericValue(algebraicNotation.charAt(1)) - 1;
 		
 		char letter = 'A';
 		char first = algebraicNotation.charAt(0);
 		
-		for(int i = 1; i <= 8; i++)
+		for(int i = 0; i < 7; i++)
 		{
 			if(first == letter)
 			{
-				this.x = i - 1;
+				this.x = i;
 			}
 			letter++;
 		}
@@ -78,7 +78,7 @@ public class Position {
 	public String toAlgebraicNotation() 
 	{
 		char letter = 'A', first = ' ';
-		for(int i = 1; i <= 8; i++)
+		for(int i = 0; i < 7; i++)
 		{
 			if(i == this.x)
 			{
@@ -86,7 +86,7 @@ public class Position {
 			}
 			letter++;
 		}
-		return first + "" + this.y;
+		return first + "" + (this.y + 1);
 	}
 	
 	/**

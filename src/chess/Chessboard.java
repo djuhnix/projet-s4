@@ -144,7 +144,7 @@ public class Chessboard extends java.lang.Object
 		boolean res = false;
 
 		if( !start.isOnSameDiagonalAs(end))
-			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même ligne");
+			throw new IllegalArgumentException("les positions start et end ne sont pas sur la même diagonale");
 
 		int depX, finX, depY, finY;
 
